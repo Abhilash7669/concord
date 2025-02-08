@@ -1,4 +1,5 @@
 
+import SocketLayout from '@/components/layouts/socket-layout/socket-layout';
 import DummyComponent from '@/components/protected/DummyComponent';
 import { getCurrentSession } from '@/lib/auth/get-current-session';
 import { redirect } from 'next/navigation';
@@ -13,5 +14,9 @@ export default async function Page({}: Props) {
   if(session?.id === null) return redirect("/login");
 
 
-  return <DummyComponent />
+  return (
+    <SocketLayout>
+      <DummyComponent />
+    </SocketLayout>
+  )
 }
