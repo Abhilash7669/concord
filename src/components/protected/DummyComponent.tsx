@@ -3,45 +3,44 @@
 import { useEffect, useState } from "react";
 import PrimaryText from "../text/primary/primary-text";
 import SecondaryText from "../text/secondary/secondary-text";
+import { useSocket } from "@/lib/context/SocketContext";
 
 type Props = object;
 
 export default function DummyComponent({}: Props) {
 
-    const [onMount, setOnMount] = useState<boolean>(false);
+    const { socket } = useSocket();
+    const [socketMessage, setSocketMessage] = useState<string | null>(null);
 
     useEffect(() => {
 
-        if(!onMount) {
-            setOnMount(() => true);
-            return;
+        if(socket) {
+            socket.on("connect", socketConnect);
+            socket.on("hello", setSocketEmitValue);
         }
 
-        (async() => {
+        return () => {
+            socket?.off("connect", socketConnect);
+            socket?.off("hello", setSocketEmitValue);
+        }
 
-            try {
-                const response = await fetch("http://localhost:4000/");
-                if(response.ok) {
-                    const responseData = await response.json();
-                    console.log(responseData, "res");
-                }
-            } catch (error) {
-                console.error(error);
-            }
+    }, [socket]);
 
-        })();
+    function socketConnect(): void {
+        console.log("Socket connected");
+    }
 
-        
-
-    }, [onMount]);  
+    function setSocketEmitValue(arg: string): void {
+        setSocketMessage(() => arg);
+    }
 
   return (
     <section className="grid place-items-center place-content-center h-screen gap-2">
         <PrimaryText>
-            Hello, World!
+            Render Socket Message
         </PrimaryText>
         <SecondaryText>
-            This is a client component
+            {socketMessage ? socketMessage : "No socket message "}
         </SecondaryText>
     </section>
   )
