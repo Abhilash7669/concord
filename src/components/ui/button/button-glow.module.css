@@ -1,0 +1,57 @@
+.button {
+    border-radius: 0.26rem;
+    position: relative;
+    display: flex;
+    padding: 0.2rem 0.1rem;
+    align-items: center;
+    justify-content: center;
+}
+.glow_container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    border-radius: 0.26rem;
+    filter: blur(4px);
+    overflow: hidden;
+}
+.glow {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.glow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    background-image: conic-gradient(rgba(0,0,0,0), #FFFFFF, rgba(0,0,0,1) 45%);
+    background-position: center center;
+    height: 100rem;
+    width: 100rem;
+    animation: glow 5s linear infinite;
+}
+.inner_button {
+    border-radius: 0.26rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:  rgb(255, 255, 255);    
+    padding: 0.42rem 1.6rem;
+    color: #181818;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes glow {
+    100% {
+        transform: translate(-50%, -50%) rotate(1turn);
+    }
+}

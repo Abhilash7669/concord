@@ -8,9 +8,27 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        nunito: ["var(--font-nunito)"],
+        montserrat: ["var(--font-montserrat)"]
+      },
       colors: {
-        background: "var(--background)",
+        background: "hsl(var(--background))",
         foreground: "var(--foreground)",
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))'
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))'
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          blue: 'hsl(var(--accent-blue))'
+        }
       },
     },
   },
